@@ -38,6 +38,12 @@ Setelah pandai mengatur jalur-jalur khusus, kalian diminta untuk membantu North 
 ## Soal 2
 > Kalian diminta untuk melakukan drop semua TCP dan UDP kecuali port 8080 pada TCP.
 
+IP yang dituju adalah IP yang dikasih DHCP
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/857f9f19-e797-426c-82be-fd77f487116a" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/1189729a-f38f-4544-a6cb-6881f2ee5d2f" width="600">
+</p>
+
 ## Soal 3
 > Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop.
 
