@@ -36,6 +36,8 @@ ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 
 iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
 ```
+
+lalu test dengan melakukan ping ke luar seperti google.com. berikut merupakan hasilnya:
 <p align="center">
   <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/318dff40-545f-4030-b643-0fc985b07132" width="600">
   <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/67fb952b-e21b-482f-8f67-c110be56a76c" width="600">
