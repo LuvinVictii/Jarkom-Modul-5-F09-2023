@@ -47,14 +47,35 @@ IP yang dituju adalah IP yang dikasih DHCP
 ## Soal 3
 > Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop.
 
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/7f949503-ac7c-4d28-a32b-652b0216d719" width="900">
+</p>
+
 ## Soal 4
 > Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
+
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/779a8894-8de0-4c33-922e-317c4e9bddcb" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/2fc3988b-2ac8-4759-b094-9ff2b3c488fb" width="600">
+</p>
 
 ## Soal 5
 > Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
 
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/4a96de7d-85d1-418d-8d46-8203fafe6397" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/26fd2bcb-e698-434c-b0d1-01d5260d8855" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/0108d58c-2a09-4372-be48-92b0d9c83f95" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/2f125176-3bf5-4c01-bd97-1cc3608ecb0c" width="600">
+</p>
+
 ## Soal 6
 > Lalu, karena ternyata terdapat beberapa waktu di mana network administrator dari WebServer tidak bisa stand by, sehingga perlu ditambahkan rule bahwa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dilarang (istirahat maksi cuy) dan akses di hari Jumat pada jam 11.00 - 13.00 juga dilarang (maklum, Jumatan rek).
+
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/4862fbf2-6e0b-446f-919d-4227560bbd6c" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/46d84a3e-252d-4ca8-b53e-dac2021ee07b" width="600">
+</p>
 
 ## Soal 7
 > Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
