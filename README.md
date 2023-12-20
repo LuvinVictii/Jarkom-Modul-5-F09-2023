@@ -29,6 +29,13 @@ Setelah pandai mengatur jalur-jalur khusus, kalian diminta untuk membantu North 
 
 ## Soal 1
 > Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Aura menggunakan iptables, tetapi tidak ingin menggunakan MASQUERADE.
+
+jalankan command berikut di aura :
+```
+ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
+```
 <p align="center">
   <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/318dff40-545f-4030-b643-0fc985b07132" width="600">
   <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/67fb952b-e21b-482f-8f67-c110be56a76c" width="600">
@@ -135,14 +142,107 @@ iptables -A INPUT -p tcp --dport 22 -s 10.56.16.0/22 -m time --timestart 11:00 -
 ## Soal 7
 > Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
 
+gunakan rules berikut pada `heiter` :
+
+```
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.56.16.3 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.56.16.3
+
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.56.16.3 -j DNAT --to-destination 10.56.31.2
+
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.56.31.2 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.56.31.2
+
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.56.31.2 -j DNAT --to-destination 10.56.16.3
+```
+test menggunakan dapat 2 opsi :
+1. command di sein : `while true; do nc -l -p 80 -c 'echo "ini sein"'; done` . sambil command di stark : `while true; do nc -l -p 80 -c 'echo "ini stark"'; done` <br>
+lalu test di client dengan `nc 10.56.31.2 80` ber kali kali.
+
+2. command di sein : `while true; do nc -l -p 443 -c 'echo "ini sein"'; done` . sambil command di stark : `while true; do nc -l -p 443 -c 'echo "ini stark"'; done` <br>
+lalu test di client (cth : TurkRegion) dengan `nc 10.56.31.2 443` ber kali kali. <br><br>
+
+contoh menggunakan opsi 2: 
 ![](https://private-user-images.githubusercontent.com/115441787/291975340-0b2603e4-8d76-4611-be2b-117eab23d1be.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTQ5MzcsIm5iZiI6MTcwMzA5NDYzNywicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc1MzQwLTBiMjYwM2U0LThkNzYtNDYxMS1iZTJiLTExN2VhYjIzZDFiZS5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxNzUwMzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xMzk4YzJjNmNkNDhhODMwOGEyZWI1MThlOTRiMGI4ZjM0NDA1MjdkZDUwMjM3ZWZmOWZlYmE2NGZhYTJjMmMxJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.LUrsu9MYVLqDBJEsk-ZohcGb0F2GfpdGYEOjZFyYuIw)
 
 ## Soal 8
 > Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
 
+buat file bash yang berisi aturan pada soal, seperti sebagai berikut:
+
+```
+Revolte_Subnet="10.56.29.0/30"
+
+Pemilu_Start=$(date -d "2023-10-19T00:00" +"%Y-%m-%dT%H:%M")
+
+Pemilu_End=$(date -d "2024-02-15T00:00" +"%Y-%m-%dT%H:%M")
+
+iptables -A INPUT -p tcp -s $Revolte_Subnet --dport 80 -m time --datestart "$Pemilu_Start" --datestop "$Pemilu_End" -j DROP
+```
+
+lalu jalankan file bash tersebut. lalu test di `revolte` dan di `grobeforest` seperti sebagai berikut :
+
+![](https://private-user-images.githubusercontent.com/115441787/291977750-dad14cda-f0cc-4333-a294-552eb6ad2881.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTU1NjEsIm5iZiI6MTcwMzA5NTI2MSwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc3NzUwLWRhZDE0Y2RhLWYwY2MtNDMzMy1hMjk0LTU1MmViNmFkMjg4MS5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxODAxMDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT01ZTA4M2UwMGY1NWE3MDczZmYwMzgwMzkxYzhjNGI0NzRhMzRmNjdmMWMwMDNmZjNlYWM2YWQzYzRjYTQ3NGVmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.GADEpP8YjkJvwGFj1sm9yoCAsognqPL_VlUfje1S3i0)
+
+![](https://private-user-images.githubusercontent.com/115441787/291977912-b9e410bc-fe03-4e77-b07f-2eb136325856.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTU2MDUsIm5iZiI6MTcwMzA5NTMwNSwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc3OTEyLWI5ZTQxMGJjLWZlMDMtNGU3Ny1iMDdmLTJlYjEzNjMyNTg1Ni5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxODAxNDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mOGE1MjFiMTE0ODBjNjBiNjFkMGJhMjI2MTk0ZGRlNjBlY2RlN2E2YWU1ZjA1NjdhMzAxZjUyZjJjM2Y2OTBhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.caBhzhNOx-7mTdLQuqDcEFRFD76fh-IuYG21Q4XtiCE)
+<br>
+terlihat pada revolte port 22 sudah filtered
+
+
 ## Soal 9
 > Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit.
 > (clue: test dengan nmap)
 
+gunakan aturan berikut pada web server :
+```
+iptables -N portscan
+
+iptables -A INPUT -m recent --name portscan --update --seconds 600 --hitcount 20 -j DROP
+iptables -A FORWARD -m recent --name portscan --update --seconds 600 --hitcount 20 -j DROP
+
+iptables -A INPUT -m recent --name portscan --set -j ACCEPT
+iptables -A FORWARD -m recent --name portscan --set -j ACCEPT
+```
+
+test di client bisa memakai dua cara:
+1. ping ip web server (contoh stark : 10.56.31.2)
+ping akan macet setelah send req ke 20 diterima oleh stark
+2. menggunakan bash test9.sh pada grobeforest yang sudah ada syntax looping menggunakan nmap juga ke stark <br>
+    ```
+    for i in {1..25}; do
+      echo $i
+      nmap -p 80 -T2 -sS 10.56.31.2
+      sleep 2
+    done
+    ```
+agar lebih cepat, digunakan testing cara 1 :
+![](https://private-user-images.githubusercontent.com/115441787/291978816-3ea49200-5c42-4c1e-991b-f8ebe96c4414.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTU4MjcsIm5iZiI6MTcwMzA5NTUyNywicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc4ODE2LTNlYTQ5MjAwLTVjNDItNGMxZS05OTFiLWY4ZWJlOTZjNDQxNC5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxODA1MjdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iNThjNGViMjNhZWVmODA4YWI3N2U0YWUzYzYwMTdmY2ViMDI4N2UxZTRkZjRmODc0MjZkZDNlYjRmNjUyN2IwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.gdeApa90e64z3C_LaICLExL1PnsOLKxGtTUsJdOW8sg)
+
+ping diberhentikan karena saat `stark` ,sebagai web server yang digunakan, sudah menerima 20 req. maka ping akan diam saja tidak mengeluarkan apapun.
+
 ## Soal 10
 > Karena kepala suku ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level. 
+
+gunakan aturan berikut di semua node yang merupakan server dan semua node yang merupakan router :
+```
+iptables -A INPUT  -j LOG --log-level debug --log-prefix 'Dropped Packet' -m limit --limit 1/second --limit-burst 10
+```
+
+penjelasan singkat: <br>
+1. `-A INPUT`: Menambahkan aturan ke chain INPUT. Ini berarti aturan ini akan berlaku untuk paket-paket yang menuju ke sistem lokal.
+
+2. `-j LOG`: Menentukan tindakan yang akan diambil jika paket cocok dengan aturan ini, yaitu mencatat pesan log.
+
+3. `--log-level debug`: Menentukan tingkat log yang akan digunakan. Dalam hal ini, tingkat lognya adalah "debug". Anda dapat mengganti "debug" dengan tingkat log yang sesuai dengan kebutuhan Anda (info, warning, debug, dll.).
+
+4. `--log-prefix 'Dropped Packet'`: Menentukan awalan (prefix) untuk pesan log yang akan dicatat. Dalam hal ini, pesan log akan dimulai dengan teks "Dropped Packet".
+
+5. `-m limit --limit 1/second` --limit-burst 10: Menggunakan modul limit untuk mengontrol frekuensi pencatatan log.
+   * -m limit: Menyertakan modul limit.
+   * --limit 1/second: Menentukan batasan frekuensi pencatatan log, dalam hal ini setiap detik satu kali.
+   * --limit-burst 10: Menentukan jumlah burst atau "limit-burst". Ini adalah jumlah log yang dapat dicatat dalam satu waktu burst sebelum batasan frekuensi berlaku.
+
+
+<hr>
+
+# Kendala
+1. Telat memahami konsep iptables yang merupakan cara untuk memberikan aturan antar node
+2. Waktunya bersamaan dengan masa-masa akhir Final Project tugas lain
