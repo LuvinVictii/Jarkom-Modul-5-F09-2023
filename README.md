@@ -96,14 +96,13 @@ iptables -A INPUT -p tcp --dport 22 -j DROP
 lalu buka port 22 menggunakan : `nc -l -p 22` di web server (contoh : stark). <br>
 
 testing => gunakan nmap (ip stark) 22 => `nmap 10.56.31.2 22` . lakukan di semua client dan akan terlihat hanya di GrobeForest saja yang port 22 nya open, sisanya filtered.
-![](https://private-user-images.githubusercontent.com/115441787/291972229-b9932eff-c63e-4aad-887e-0f55fb04805b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTQxMTAsIm5iZiI6MTcwMzA5MzgxMCwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTcyMjI5LWI5OTMyZWZmLWM2M2UtNGFhZC04ODdlLTBmNTVmYjA0ODA1Yi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxNzM2NTBaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iMTNlYTgxY2NhMjE5NTllMmMwZDIzNGJiNDE1OGYzYmM5NGU1ZTgwZTU4OWQwYzg4ZTU1YjkwZmU5OGRhZDI2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.hdnvgJpB91aq3uiiBq9IHDyH6q-4fL-w7WLu61c9XrA)
 
-![](https://private-user-images.githubusercontent.com/115441787/291972633-2f098f7f-c0d1-4bb9-b8f5-25b620d4d6d8.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTQyMjIsIm5iZiI6MTcwMzA5MzkyMiwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTcyNjMzLTJmMDk4ZjdmLWMwZDEtNGJiOS1iOGY1LTI1YjYyMGQ0ZDZkOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxNzM4NDJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05MThmNDZhYTRiMDQ5YWM1MWZiNzZjMWU0MWRiM2YzYTI1N2JlNGY1ZDJiYzcxMTcyMzg0M2M2MjIwZjgxODgwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.prnPMc06O37m5iQMtY3jWezshz6VzQfAvuxrrEhkWbs)
-
-![](https://private-user-images.githubusercontent.com/115441787/291973081-ce753815-5447-40db-b096-62377d2f5ea3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTQzNDYsIm5iZiI6MTcwMzA5NDA0NiwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTczMDgxLWNlNzUzODE1LTU0NDctNDBkYi1iMDk2LTYyMzc3ZDJmNWVhMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxNzQwNDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xNzJkZDIzNzc2ZTQ5ODQ2NDJjNGY3YTEyMjVjNTIxN2JjZTczMGRhNWJiZTJjNWNlNjgyM2EwNjlhZTVmOTZmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.ltNdrHCZqd_t-G8UzwKPRWRhxwpD86dcclSR1w2Q9FA)
-
-
-![](https://private-user-images.githubusercontent.com/115441787/291973602-ee8aca6f-ef51-4324-838f-9222f6e54fc3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTQ0NzIsIm5iZiI6MTcwMzA5NDE3MiwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTczNjAyLWVlOGFjYTZmLWVmNTEtNDMyNC04MzhmLTkyMjJmNmU1NGZjMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxNzQyNTJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT01ZTFjMThhNTVjMTU2NmUxYjk2YTUzMTllMTA3MzEyZTMxNzk4YjBhZDAyNzI2MDc1NjJhOWQ5MzAzMzVhZTU2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.qIpxhRptHBQf0zOPA80cGFdtZSH4lU_gKZY4mdvC5zI)
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/bf32c6b8-56ad-4029-a6cd-ac768c12540f" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/5f2a5519-1d37-4157-8931-0fa72707a0ae" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/23251d4b-6d2c-4dab-9be3-fb5de0a753f7" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/b138040e-c2b3-4e17-9214-789bfdb1ea06" width="600">
+</p>
 
 ## Soal 5
 > Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
@@ -120,7 +119,10 @@ iptables -A INPUT -p tcp --dport 22 -j DROP
 
 karena saat pengecekan belum masih masuk di range jam tersebut, makan untuk pengecekan saja digunakan timestop `14:00`. <br>
 Didapatkan output sebagai berikut :
-![](https://private-user-images.githubusercontent.com/115441787/291974788-5ab33986-abdd-4e25-99ff-11712fb757e5.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTQ3OTUsIm5iZiI6MTcwMzA5NDQ5NSwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc0Nzg4LTVhYjMzOTg2LWFiZGQtNGUyNS05OWZmLTExNzEyZmI3NTdlNS5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxNzQ4MTVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT01OWUzM2FlMDFmNDZkMzg4ZjAwNWY3MGVmMWY2ZGU1NzE2NGJlMWZkOWY5NTQ2YWU1YjUzODI1NjRiYTI4YWQzJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.d2RtSoURSglYIVxaDUKE7eXYkTINkZid-yJ2pRjgAkM)
+
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/1b375abf-850b-411f-85a3-974748587e7a" width="600">
+</p>
 
 terlihat di GrobeForest sudah filtered untuk port 22 karena diluar jamnya (digunakan timestop berbeda dengan soal untuk testing)
 
@@ -163,7 +165,10 @@ lalu test di client dengan `nc 10.56.31.2 80` ber kali kali.
 lalu test di client (cth : TurkRegion) dengan `nc 10.56.31.2 443` ber kali kali. <br><br>
 
 contoh menggunakan opsi 2: 
-![](https://private-user-images.githubusercontent.com/115441787/291975340-0b2603e4-8d76-4611-be2b-117eab23d1be.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTQ5MzcsIm5iZiI6MTcwMzA5NDYzNywicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc1MzQwLTBiMjYwM2U0LThkNzYtNDYxMS1iZTJiLTExN2VhYjIzZDFiZS5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxNzUwMzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xMzk4YzJjNmNkNDhhODMwOGEyZWI1MThlOTRiMGI4ZjM0NDA1MjdkZDUwMjM3ZWZmOWZlYmE2NGZhYTJjMmMxJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.LUrsu9MYVLqDBJEsk-ZohcGb0F2GfpdGYEOjZFyYuIw)
+
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/4a5241d4-9fb4-4fba-a4e5-f066dd4569bd" width="600">
+</p>
 
 ## Soal 8
 > Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
@@ -182,9 +187,11 @@ iptables -A INPUT -p tcp -s $Revolte_Subnet --dport 80 -m time --datestart "$Pem
 
 lalu jalankan file bash tersebut. lalu test di `revolte` dan di `grobeforest` seperti sebagai berikut :
 
-![](https://private-user-images.githubusercontent.com/115441787/291977750-dad14cda-f0cc-4333-a294-552eb6ad2881.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTU1NjEsIm5iZiI6MTcwMzA5NTI2MSwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc3NzUwLWRhZDE0Y2RhLWYwY2MtNDMzMy1hMjk0LTU1MmViNmFkMjg4MS5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxODAxMDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT01ZTA4M2UwMGY1NWE3MDczZmYwMzgwMzkxYzhjNGI0NzRhMzRmNjdmMWMwMDNmZjNlYWM2YWQzYzRjYTQ3NGVmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.GADEpP8YjkJvwGFj1sm9yoCAsognqPL_VlUfje1S3i0)
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/e8f03a92-c893-45df-b154-d3c18cbc3114" width="600">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/20346944-bc15-4cbb-8aeb-c6c35c3c1e0c" width="600">
+</p>
 
-![](https://private-user-images.githubusercontent.com/115441787/291977912-b9e410bc-fe03-4e77-b07f-2eb136325856.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTU2MDUsIm5iZiI6MTcwMzA5NTMwNSwicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc3OTEyLWI5ZTQxMGJjLWZlMDMtNGU3Ny1iMDdmLTJlYjEzNjMyNTg1Ni5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxODAxNDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mOGE1MjFiMTE0ODBjNjBiNjFkMGJhMjI2MTk0ZGRlNjBlY2RlN2E2YWU1ZjA1NjdhMzAxZjUyZjJjM2Y2OTBhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.caBhzhNOx-7mTdLQuqDcEFRFD76fh-IuYG21Q4XtiCE)
 <br>
 terlihat pada revolte port 22 sudah filtered
 
@@ -216,7 +223,10 @@ ping akan macet setelah send req ke 20 diterima oleh stark
     done
     ```
 agar lebih cepat, digunakan testing cara 1 :
-![](https://private-user-images.githubusercontent.com/115441787/291978816-3ea49200-5c42-4c1e-991b-f8ebe96c4414.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMwOTU4MjcsIm5iZiI6MTcwMzA5NTUyNywicGF0aCI6Ii8xMTU0NDE3ODcvMjkxOTc4ODE2LTNlYTQ5MjAwLTVjNDItNGMxZS05OTFiLWY4ZWJlOTZjNDQxNC5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMFQxODA1MjdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iNThjNGViMjNhZWVmODA4YWI3N2U0YWUzYzYwMTdmY2ViMDI4N2UxZTRkZjRmODc0MjZkZDNlYjRmNjUyN2IwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.gdeApa90e64z3C_LaICLExL1PnsOLKxGtTUsJdOW8sg)
+
+<p align="center">
+  <img src="https://github.com/LuvinVictii/Jarkom-Modul-5-F09-2023/assets/78089862/f0880e94-17c3-43d2-afb3-90ad0d31165d" width="600">
+</p>
 
 ping diberhentikan karena saat `stark` ,sebagai web server yang digunakan, sudah menerima 20 req. maka ping akan diam saja tidak mengeluarkan apapun.
 
